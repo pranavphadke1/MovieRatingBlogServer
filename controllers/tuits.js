@@ -1,6 +1,5 @@
 export default [
     {
-        "_id": "123",
         "topic": "Web Development",
         "postedBy": {
             "username": "ReactJS"
@@ -23,7 +22,6 @@ export default [
         }
     },
     {
-        "_id": "567",
         "topic": "Space",
         "postedBy": {
             "username": "SpaceX"
@@ -47,7 +45,6 @@ export default [
         }
     },
     {
-        "_id": "234",
         "topic": "Space",
         "postedBy": {
             "username": "Scott Manley"
@@ -69,7 +66,6 @@ export default [
         }
     },
     {
-        "_id": "345",
         "topic": "Web Development",
         "postedBy": {
             "username": "jQuery"
@@ -90,7 +86,6 @@ export default [
         }
     },
     {
-        "_id": "456",
         "topic": "Web Development",
         "postedBy": {
             "username": "NodeJS"
