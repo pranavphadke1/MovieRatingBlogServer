@@ -1,61 +1,35 @@
-import people from './users.js';
-let users = people;
+import usersDao from "../users/users-dao.js";
 
-const userController = (app) => {
-    app.get('/api/users', findAllUsers);
-    app.get('/api/users/:uid', findUserById);
-    app.post('/api/users', createUser);
-    app.delete('/api/users/:uid', deleteUser);
-    app.put('/api/users/:uid', updateUser);
-}
-
-const findAllUsers = (req, res) => {
-    const type = req.query.type;
-    if(type) {
-        res.json(findUsersByType(type));
-        return;
-    }
+const findAllUsers = async (req, res) => {
+    const users = await usersDao.findAllUsers()
     res.json(users);
 }
 
-const findUsersByType = (type) => {
-    return users.filter(x => x.type == type);
-}
-
-const findUserById = (req, res) => {
-    const userId = req.params.uid;
-    const user = users.find(u => u._id === userId);
-    res.json(user);
-}
-
-const createUser = (req, res) => {
+const createUser = async (req, res) => {
     const newUser = req.body;
-    newUser._id = (new Date()).getTime() + '';
-    users.push(newUser);
-    res.json(newUser);
+    const insertedUser = await usersDao.createUser(newUser);
+    res.json(insertedUser);
 }
 
-
-const deleteUser = (req, res) => {
-    const userId = req.params['uid'];
-    users = users.filter(usr =>
-                             usr._id !== userId);
-    res.sendStatus(200);
+const deleteUser = async (req, res) => {
+    const userIdToDelete = req.params.uid;
+    const status = await usersDao.deleteUser(userIdToDelete);
+    res.send(status);
 }
 
-const updateUser = (req, res) => {
-    const userId = req.params['uid'];
+const updateUser = async (req, res) => {
+    const userIdToUpdate = req.params.uid;
     const updatedUser = req.body;
-    users = users.map(usr =>
-                          usr._id === userId ?
-                          updatedUser :
-                          usr);
-    res.sendStatus(200);
+    const status = await usersDao.updateUser(userIdToUpdate, updatedUser);
+    res.send(status);
 }
 
 
+const usersController = (app) => {
+    app.post('/api/users', createUser);
+    app.get('/api/users', findAllUsers);
+    app.put('/api/users/:uid', updateUser);
+    app.delete('/api/users/:uid', deleteUser);
+}
 
-
-
-
-export default userController;
+export default usersController;
