@@ -1,8 +1,39 @@
-import usersModel from "./users-model.js";
+import usersModel from './users-model.js';
 
-const findAllUsers = () => usersModel.find();
-const createUser = (user) => usersModel.create(user);
-const deleteUser = (uid) => usersModel.deleteOne({_id: uid});
-const updateUser = (uid, user) => usersModel.updateOne({_id: uid}, {$set: user})
+const findAllUsers = () => {
+    return usersModel.find()
+}
+const findUserById = (id) => {
+    return usersModel.findById(id)
+    // return userModel.find({_id: id})
+}
+const findUserByEmail = (email) =>
+    usersModel.findOne({email})
+// userModel.findOne({email: email})
+// userModel.find({email: email})
 
-export default {findAllUsers, createUser, deleteUser, updateUser};
+const findUserByCredentials = (email, password) =>
+    usersModel.findOne({email, password})
+// userModel.findOne({email: email, password: password})
+const createUser = (user) =>
+    usersModel.create(user)
+const updateUser = (id, user) =>
+    usersModel.updateOne(
+        {_id: id},
+        {$set: user}
+        // {
+        //   $set: {
+        //     email: user.email,
+        //     password: user.password,
+        //     firstName: user.firstName,
+        //     lastName: user.lastName
+        //   }
+        // }
+    )
+const deleteUser = (id) =>
+    usersModel.deleteOne({_id: id})
+
+export default {
+    findUserByEmail, findAllUsers, findUserByCredentials,
+    findUserById, createUser, deleteUser, updateUser
+}
