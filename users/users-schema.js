@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 const usersSchema = mongoose.Schema({
                                         email: {type: String, required: true, unique: true},
                                         password: {type: String, required: true},
+                                        handle: {type: String, default: "newUser"},
                                         firstName: {type: String, default: "newUserFirstName"},
                                         lastName: {type: String, default: "newUserLastName"},
                                         role: {
@@ -10,9 +11,8 @@ const usersSchema = mongoose.Schema({
                                             enum: ['USER', 'REVIEWER', 'ADMIN'],
                                             default: 'USER'
                                         },
-                                        following: [{userId : String}],
-                                        followers: {type: Number, default: 0},
-                                        likedMovies: [{movieId : String}]
+                                        likedMovies: [{type: String, default: []}],
+                                        dislikedMovies: [{type: String, default: []}],
                                     }, {collection: 'users'});
 
 export default usersSchema;

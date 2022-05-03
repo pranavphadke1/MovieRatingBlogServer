@@ -11,12 +11,9 @@ const likeMovie = async (movie) => {
     } else {
         // insert
         actualMovie = await moviesModel.create({
-                                                   // title: movie.title,
-                                                   // imdbID: movie.imdbID,
-                                                   // poster: movie.poster,
+
                                                    ...movie,
                                                    likes: 1,
-                                                   dislikes: 0,
                                                    reviews: 0
                                                })
     }
@@ -29,17 +26,14 @@ const dislikeMovie = async (movie) => {
     if (existingMovie) {
         // update
         const status = await moviesModel.updateOne({imdbID: movie.imdbID},
-                                                   {$set: {dislikes: existingMovie.dislikes + 1}})
-        actualMovie = {...existingMovie, dislikes: existingMovie.dislikes + 1}
+                                                   {$set: {likes: existingMovie.likes - 1}})
+        actualMovie = {...existingMovie, likes: existingMovie.likes - 1}
     } else {
         // insert
         actualMovie = await moviesModel.create({
-                                                   // title: movie.title,
-                                                   // imdbID: movie.imdbID,
-                                                   // poster: movie.poster,
+
                                                    ...movie,
-                                                   likes: 0,
-                                                   dislikes: 1,
+                                                   likes: -1,
                                                    reviews: 0
                                                })
     }
@@ -57,12 +51,9 @@ const reviewMovie = async (movie) => {
     } else {
         // insert
         actualMovie = await moviesModel.create({
-                                                   // title: movie.title,
-                                                   // imdbID: movie.imdbID,
-                                                   // poster: movie.poster,
+
                                                    ...movie,
                                                    likes: 0,
-                                                   dislikes: 0,
                                                    reviews: 1,
                                                })
     }

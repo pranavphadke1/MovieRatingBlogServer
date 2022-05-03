@@ -41,16 +41,16 @@ const logout = (req, res) => {
 }
 
 
-// const findUsers = (req, res) => {
-//     res.json(users);
-// }
+const findUsers = (req, res) => {
+    res.json(users);
+}
 
 const authController = (app) => {
     app.post('/api/signup', signup);
     app.post('/api/profile', profile);
     app.post('/api/signin', login);
     app.post('/api/logout', logout);
-    // app.get('/api/users', findUsers);
+    app.get('/api/users', findUsers);
 }
 
 export default authController;

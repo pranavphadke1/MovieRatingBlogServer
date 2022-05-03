@@ -5,7 +5,6 @@ const moviesSchema = mongoose.Schema({
                                          imdbID: {type: String, unique: true},
                                          poster: String,
                                          likes: {type: Number, default: 0},
-                                         dislikes: {type: Number, default: 0},
                                          reviews: {type: Number, default: 0},
                                      }, {collection: 'movies'})
 export default moviesSchema

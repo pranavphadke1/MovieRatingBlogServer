@@ -5,12 +5,11 @@ const findAllUsers = () => {
 }
 const findUserById = (id) => {
     return usersModel.findById(id)
-    // return userModel.find({_id: id})
+
 }
 const findUserByEmail = (email) =>
     usersModel.findOne({email})
-// userModel.findOne({email: email})
-// userModel.find({email: email})
+
 
 const findUserByCredentials = (email, password) =>
     usersModel.findOne({email, password})
@@ -21,14 +20,6 @@ const updateUser = (id, user) =>
     usersModel.updateOne(
         {_id: id},
         {$set: user}
-        // {
-        //   $set: {
-        //     email: user.email,
-        //     password: user.password,
-        //     firstName: user.firstName,
-        //     lastName: user.lastName
-        //   }
-        // }
     )
 const deleteUser = (id) =>
     usersModel.deleteOne({_id: id})
