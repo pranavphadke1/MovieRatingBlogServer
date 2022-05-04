@@ -15,6 +15,7 @@ app.use(cors({
                  credentials: true,
                  origin: 'http://localhost:3000'
              }));
+//https://eloquent-figolla-180294.netlify.app
 app.use(session({
                     secret: 'SECRETO',
                     cookie: {secure: false}
